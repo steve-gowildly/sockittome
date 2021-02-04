@@ -25,7 +25,12 @@ app.message('e', async ({ message, say }) => {
         console.log("Dispatching request");
         axios.post(
             'https://api.openai.com/v1/engines/davinci/completions',
-            {"prompt": summary, "max_tokens": 5},
+            {
+                "prompt": summary, 
+                "temperature": 0.3,
+                "max_tokens": 64,
+                "top_p": 1
+            },
             {
               headers: {
                 'Authorization': 'Bearer ' + process.env.OPEN_API_KEY,
