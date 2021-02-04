@@ -12,7 +12,7 @@ const app = new App({
 // Listens to incoming messages that contain "hello"
 app.message('hello', async ({ message, say }) => {
     counter++;
-    summary += "\r" + message;
+    summary += "\r" + message.text;
 
     // Clear the existing timeout if we have one
     if (idleBuffer) {
