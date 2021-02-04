@@ -1,4 +1,5 @@
 const { App } = require('@slack/bolt');
+const axios = require('axios');
 let idleBuffer = null;
 let summary = "";
 let counter = 0;
