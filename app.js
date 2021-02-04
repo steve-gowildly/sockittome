@@ -21,7 +21,7 @@ app.message('hello', async ({ message, say }) => {
     
     // Set the idle timeout buffer again
     idleBuffer = setTimeout(() => {
-        say(`Hey there <@${message.user}>! You've said hello ${counter} times :)`);
+        say(`Hey there <@${message.user}>! You've said hello ${counter} times :) Your summary is: ${summary}`);
         idleBuffer = null;
         summary = "";
         counter = 0;
