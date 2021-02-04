@@ -11,9 +11,9 @@ const app = new App({
 });
 
 // Listens to incoming messages that contain "hello"
-app.message('hello', async ({ message, say }) => {
+app.message('e', async ({ message, say }) => {
     counter++;
-    summary += " " + message.text;
+    summary += message.text + " ";
 
     // Clear the existing timeout if we have one
     if (idleBuffer) {
@@ -43,7 +43,7 @@ app.message('hello', async ({ message, say }) => {
                 summary = "";
                 counter = 0;
                 console.log("all is good");
-                console.log(response);
+                console.log(response.data);
             })
             .catch(function (error) {
                 idleBuffer = null;
