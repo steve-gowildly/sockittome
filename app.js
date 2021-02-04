@@ -13,7 +13,7 @@ const app = new App({
 // Listens to incoming messages that contain "hello"
 app.message('e', async ({ message, say }) => {
     counter++;
-    summary += message.text + " ";
+    summary += message.text + "\r";
 
     // Clear the existing timeout if we have one
     if (idleBuffer) {
@@ -22,15 +22,15 @@ app.message('e', async ({ message, say }) => {
     
     // Set the idle timeout buffer again
     idleBuffer = setTimeout(() => {
-        console.log("Dispatching request");
         console.log(summary);
         axios.post(
-            'https://api.openai.com/v1/engines/davinci/completions',
+            'https://api.openai.com/v1/engines/curie/completions',
             {
                 "prompt": summary, 
-                "temperature": 0.3,
-                "max_tokens": 64,
-                "top_p": 1
+                "temperature": 0.7,
+                "max_tokens": 60,
+                "top_p": 1,
+                "stop": ["\r"]
             },
             {
               headers: {
@@ -48,7 +48,6 @@ app.message('e', async ({ message, say }) => {
                 idleBuffer = null;
                 summary = "";
                 counter = 0;
-                console.log("all is good");
                 console.log(response.data);
             })
             .catch(function (error) {
@@ -57,7 +56,6 @@ app.message('e', async ({ message, say }) => {
                 counter = 0;
                 console.log(error);
             });
-
     }, 15000);
 });
 
