@@ -34,8 +34,8 @@ app.message('hello', async ({ message, say }) => {
             })
             .then(function (response) {
                 let completion = '';
-                if (response.choices && response.choices.length > 0) {
-                    completion = response.choices[0].text;
+                if (response.data.choices && response.data.choices.length > 0) {
+                    completion = response.data.choices[0].text;
                 }
 
                 say(`Hey there <@${message.user}>! I think you're about to say: ${completion}`);
