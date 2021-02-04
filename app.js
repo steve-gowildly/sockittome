@@ -12,7 +12,7 @@ const app = new App({
 // Listens to incoming messages that contain "hello"
 app.message('hello', async ({ message, say }) => {
     counter++;
-    summary += "\r" + message.text;
+    summary += " " + message.text;
 
     // Clear the existing timeout if we have one
     if (idleBuffer) {
@@ -21,11 +21,37 @@ app.message('hello', async ({ message, say }) => {
     
     // Set the idle timeout buffer again
     idleBuffer = setTimeout(() => {
-        say(`Hey there <@${message.user}>! You've said hello ${counter} times :) Your summary is: ${summary}`);
-        idleBuffer = null;
-        summary = "";
-        counter = 0;
-    }, 15000);
+        console.log("Dispatching request");
+        axios.post(
+            'https://api.openai.com/v1/engines/davinci/completions',
+            {"prompt": summary, "max_tokens": 5},
+            {
+              headers: {
+                'Authorization': 'Bearer ' + process.env.OPEN_API_KEY,
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(function (response) {
+                let completion = '';
+                if (response.choices && response.choices.length > 0) {
+                    completion = response.choices[0].text;
+                }
+
+                say(`Hey there <@${message.user}>! I think you're about to say: ${completion}`);
+                idleBuffer = null;
+                summary = "";
+                counter = 0;
+                console.log("all is good");
+                console.log(response);
+            })
+            .catch(function (error) {
+                idleBuffer = null;
+                summary = "";
+                counter = 0;
+                console.log(error);
+            });
+
+    }, 1500);
 });
 
 (async () => {
