@@ -1,5 +1,6 @@
 const { App } = require('@slack/bolt');
 let idleBuffer = null;
+let summary = "";
 let counter = 0;
 
 // Initializes your app with your bot token and signing secret
@@ -11,6 +12,7 @@ const app = new App({
 // Listens to incoming messages that contain "hello"
 app.message('hello', async ({ message, say }) => {
     counter++;
+    summary += "\r" + message;
 
     // Clear the existing timeout if we have one
     if (idleBuffer) {
@@ -21,6 +23,7 @@ app.message('hello', async ({ message, say }) => {
     idleBuffer = setTimeout(() => {
         say(`Hey there <@${message.user}>! You've said hello ${counter} times :)`);
         idleBuffer = null;
+        summary = "";
         counter = 0;
     }, 15000);
 });
