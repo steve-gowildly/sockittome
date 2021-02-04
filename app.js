@@ -21,6 +21,7 @@ app.message('hello', async ({ message, say }) => {
     idleBuffer = setTimeout(() => {
         say(`Hey there <@${message.user}>! You've said hello ${counter} times :)`);
         idleBuffer = null;
+        counter = 0;
     }, 15000);
 });
 
