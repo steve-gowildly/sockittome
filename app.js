@@ -45,9 +45,9 @@ app.message('e', async ({ message, say }) => {
                 }
 
                 // Chop the response down to be a single sentence
-                completion = completion.substring(0, completion.lastIndexOf("."));
+                completion = completion.substring(0, completion.lastIndexOf(".")) + ".";
 
-                say(`Hey there <@${message.user}>! Let me summarize all of this great info for you:\r${completion}`);
+                say(`Hey there <@${message.user}>! Let me pit my 178 billion parameters against your measly 100 billion neurons to summarize:\r${completion}`);
                 idleBuffer = null;
                 summary = "";
                 counter = 0;
