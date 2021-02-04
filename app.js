@@ -44,6 +44,9 @@ app.message('e', async ({ message, say }) => {
                     completion = response.data.choices[0].text;
                 }
 
+                // Chop the response down to be a single sentence
+                completion = completion.substring(0, completion.lastIndexOf("."));
+
                 say(`Hey there <@${message.user}>! Let me summarize all of this great info for you:\r${completion}`);
                 idleBuffer = null;
                 summary = "";
