@@ -43,7 +43,7 @@ app.event('message', async ({ event, client }) => {
 app.message('e', async ({ message, say }) => {
   let counter = 0;
   let messages = [
-    "Oh, it's your birthday on Monday!",
+    "Oh, it's your birthday on Monday Tamar!",
     "Ahem...",
     "La la la la la...",
     "Happy birthday to you.",
@@ -57,7 +57,7 @@ app.message('e', async ({ message, say }) => {
     setInterval(function(){ 
       if (counter <= 3) {
         client.chat.postMessage({
-          channel: welcomeChannelId,
+          channel: "C01M3ARHJ69",
           text: messages[counter]
         });
       }
