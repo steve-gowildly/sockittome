@@ -10,56 +10,111 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-// Listens to incoming messages that contain "hello"
+app.event('message', async ({ event, client }) => {
+  let counter = 0;
+  let messages = [
+    "Oh, it's your birthday on Monday!",
+    "Ahem...",
+    "La la la la la...",
+    "Happy birthday to you.",
+    "Squashed tomatoes and stew.",
+    "Bread and butter in the gutter.",
+    "Happy birthday to you.",
+    "Happy birthday Tamar."
+  ];
+
+  try {
+    setInterval(function(){ 
+      if (counter <= 3) {
+        client.chat.postMessage({
+          channel: welcomeChannelId,
+          text: messages[counter]
+        });
+      }
+      counter++;
+    }, 3000);
+  }
+  catch (error) {
+    console.error(error);
+  }
+});
+
+// Listens to incoming messages that contain "e"
 app.message('e', async ({ message, say }) => {
-    counter++;
-    summary += message.text + "\r";
+  let counter = 0;
+  let messages = [
+    "Oh, it's your birthday on Monday!",
+    "Ahem...",
+    "La la la la la...",
+    "Happy birthday to you.",
+    "Squashed tomatoes and stew.",
+    "Bread and butter in the gutter.",
+    "Happy birthday to you.",
+    "Happy birthday Tamar."
+  ];
 
-    // Clear the existing timeout if we have one
-    if (idleBuffer) {
-        clearTimeout(idleBuffer);
-    }
-    
-    // Set the idle timeout buffer again
-    idleBuffer = setTimeout(() => {
-        console.log(summary);
-        axios.post(
-            'https://api.openai.com/v1/engines/curie/completions',
-            {
-                "prompt": summary, 
-                "temperature": 0.7,
-                "max_tokens": 60,
-                "top_p": 1,
-                "stop": ["\r"]
-            },
-            {
-              headers: {
-                'Authorization': 'Bearer ' + process.env.OPEN_API_KEY,
-                'Content-Type': 'application/json'
+  try {
+    setInterval(function(){ 
+      if (counter <= 3) {
+        client.chat.postMessage({
+          channel: welcomeChannelId,
+          text: messages[counter]
+        });
+      }
+      counter++;
+    }, 3000);
+  }
+  catch (error) {
+    console.error(error);
+  }
+/*  counter++;
+  summary += message.text + "\r";
+
+  // Clear the existing timeout if we have one
+  if (idleBuffer) {
+      clearTimeout(idleBuffer);
+  }
+  
+  // Set the idle timeout buffer again
+  idleBuffer = setTimeout(() => {
+      console.log(summary);
+      axios.post(
+          'https://api.openai.com/v1/engines/curie/completions',
+          {
+              "prompt": summary, 
+              "temperature": 0.7,
+              "max_tokens": 60,
+              "top_p": 1,
+              "stop": ["\r"]
+          },
+          {
+            headers: {
+              'Authorization': 'Bearer ' + process.env.OPEN_API_KEY,
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(function (response) {
+              let completion = '';
+              if (response.data.choices && response.data.choices.length > 0) {
+                  completion = response.data.choices[0].text;
               }
-            })
-            .then(function (response) {
-                let completion = '';
-                if (response.data.choices && response.data.choices.length > 0) {
-                    completion = response.data.choices[0].text;
-                }
 
-                // Chop the response down to be a single sentence
-                completion = completion.substring(0, completion.lastIndexOf(".")) + ".";
+              // Chop the response down to be a single sentence
+              completion = completion.substring(0, completion.lastIndexOf(".")) + ".";
 
-                say(`Hey there <@${message.user}>! Let me pit my 178 billion parameters against your measly 100 billion neurons to summarize:\r${completion}`);
-                idleBuffer = null;
-                summary = "";
-                counter = 0;
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                idleBuffer = null;
-                summary = "";
-                counter = 0;
-                console.log(error);
-            });
-    }, 15000);
+              say(`Hey there <@${message.user}>! Let me pit my 178 billion parameters against your measly 100 billion neurons to summarize:\r${completion}`);
+              idleBuffer = null;
+              summary = "";
+              counter = 0;
+              console.log(response.data);
+          })
+          .catch(function (error) {
+              idleBuffer = null;
+              summary = "";
+              counter = 0;
+              console.log(error);
+          });
+  }, 15000);*/
 });
 
 (async () => {
