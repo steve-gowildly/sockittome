@@ -25,7 +25,7 @@ app.event('message', async ({ event, client }) => {
 
   try {
     setInterval(function(){ 
-      if (counter <= 3) {
+      if (counter <= 7) {
         client.chat.postMessage({
           channel: "C01M3ARHJ69",
           text: messages[counter]
