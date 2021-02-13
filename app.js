@@ -10,7 +10,7 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-/*app.event('message', async ({ event, client }) => {
+app.event('message', async ({ event, client }) => {
   let counter = 0;
   let messages = [
     "Oh, it's your birthday on Monday!",
@@ -27,7 +27,7 @@ const app = new App({
     setInterval(function(){ 
       if (counter <= 3) {
         client.chat.postMessage({
-          channel: welcomeChannelId,
+          channel: "C01M3ARHJ69",
           text: messages[counter]
         });
       }
@@ -37,10 +37,10 @@ const app = new App({
   catch (error) {
     console.error(error);
   }
-});*/
+});
 
 // Listens to incoming messages that contain "e"
-app.message('e', async ({ message, say }) => {
+/*app.message('e', async ({ message, say }) => {
   let counter = 0;
   let messages = [
     "Oh, it's your birthday on Monday Tamar!",
@@ -66,7 +66,7 @@ app.message('e', async ({ message, say }) => {
   }
   catch (error) {
     console.error(error);
-  }
+  }*/
 /*  counter++;
   summary += message.text + "\r";
 
@@ -114,8 +114,9 @@ app.message('e', async ({ message, say }) => {
               counter = 0;
               console.log(error);
           });
-  }, 15000);*/
-});
+  }, 15000);
+});*/
+
 
 (async () => {
   // Start your app
