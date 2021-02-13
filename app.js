@@ -63,6 +63,7 @@ app.message('e', async ({ message, say }) => {
       }
       counter++;
     }, 3000);
+    
   }
   catch (error) {
     console.error(error);
