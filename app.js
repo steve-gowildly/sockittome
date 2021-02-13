@@ -10,7 +10,7 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-app.event('message', async ({ event, client }) => {
+/*app.event('message', async ({ event, client }) => {
   let counter = 0;
   let messages = [
     "Oh, it's your birthday on Monday!",
@@ -37,7 +37,7 @@ app.event('message', async ({ event, client }) => {
   catch (error) {
     console.error(error);
   }
-});
+});*/
 
 // Listens to incoming messages that contain "e"
 app.message('e', async ({ message, say }) => {
@@ -63,7 +63,6 @@ app.message('e', async ({ message, say }) => {
       }
       counter++;
     }, 3000);
-    
   }
   catch (error) {
     console.error(error);
