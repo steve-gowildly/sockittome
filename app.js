@@ -20,12 +20,13 @@ app.event('message', async ({ event, client }) => {
     "Squashed tomatoes and stew.",
     "Bread and butter in the gutter.",
     "Happy birthday to you.",
-    "Happy birthday Tamar."
+    "Happy birthday Tamar.",
+    ":birthday:"
   ];
 
   try {
     setInterval(function(){ 
-      if (counter <= 7) {
+      if (counter <= 8) {
         client.chat.postMessage({
           channel: "C01M3ARHJ69",
           text: messages[counter]
